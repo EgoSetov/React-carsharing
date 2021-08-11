@@ -6,8 +6,6 @@ import Spinner from '../Spinner/Spinner'
 
 function Proifle({ profile }) {
 
-	console.log(profile);
-
 	if (JSON.stringify(profile) === '{}' || !profile) return <div className="container"><Spinner></Spinner></div>
 
 	return (

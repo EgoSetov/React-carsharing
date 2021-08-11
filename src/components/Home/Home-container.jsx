@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import Home from './Home'
 
 function HomeContainer(props) {
-	console.log(props);
 	return (
 		<Home {...props} />
 	)

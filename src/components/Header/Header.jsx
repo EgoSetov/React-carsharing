@@ -27,7 +27,9 @@ let Header = (props) => {
 							</li>
 						</ul>
 						<div className="d-flex">
-							<button onClick={showModal} to="/login" className="btn btn-primary">Войти</button>
+							{!props.authorized
+								? <button onClick={showModal} to="/login" className="btn btn-primary">Войти</button>
+								: <NavLink to={`/userProfile`}><h4>{props.dataUser.userName}</h4></NavLink>}
 						</div>
 					</div>
 				</div>

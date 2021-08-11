@@ -1,5 +1,10 @@
-.modal-content {
+/* .modalForm{
 	top: 50% !important;
 	left: 50% !important;
-	transform: translate(-100%, -150%) !important;
+	transform: translateX(-50%) !important;
+} */
+
+.modal-dialog{
+	transform: translateX(-50%) !important;
+	top: 20% !important;
 }

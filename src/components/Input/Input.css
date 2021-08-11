@@ -1,0 +1,11 @@
+.error{
+	border: 2px solid red;
+}
+
+.form-control{
+	min-width: 426px;
+}
+
+.error-text{
+	color: red;
+}

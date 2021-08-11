@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-let CarCard = ({ info, setProfile }) => {
+let CarCard = ({ info, setProfile, checkAccount }) => {
 
 	let setProfileFunc = (id) => {
 		setProfile(id)
@@ -21,15 +21,15 @@ let CarCard = ({ info, setProfile }) => {
 			</ul>
 			<div className="card-body">
 				<NavLink onClick={() => { setProfileFunc(info.id) }} to={`/profile/${info.id}`} className="btn btn-info" style={{ margin: '0px 2px' }}>Подробнее</NavLink>
-				<button className="btn btn-success">Забронировать</button>
+				<button onClick={() => { checkAccount(info.id) }} className="btn btn-success">Забронировать</button>
 			</div>
 		</div>
 	)
 }
 
-function Cars({ cars, setProfile }) {
+function Cars({ cars, setProfile, checkAccount }) {
 
-	let mapElement = cars.map(el => <CarCard key={el.id} info={el} setProfile={setProfile} />)
+	let mapElement = cars.map(el => <CarCard key={el.id} info={el} setProfile={setProfile} checkAccount={checkAccount} />)
 
 	return (
 		<div className="container d-flex justify-content-around flex-wrap">

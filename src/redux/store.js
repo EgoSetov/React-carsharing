@@ -4,6 +4,7 @@ import AccountReducer from "./AccountReducer";
 import CarsReducer from './CarsReducer'
 import ProfileReducer from "./ProfileReducer";
 import UsersDeduser from "./UsersReducer";
+import MessageReducer from "./MessageReducer";
 import { reducer as formReducer } from 'redux-form'
 
 let reducers = combineReducers({
@@ -11,6 +12,7 @@ let reducers = combineReducers({
 	profile: ProfileReducer,
 	users: UsersDeduser,
 	account: AccountReducer,
+	message: MessageReducer,
 	form: formReducer
 })
 
