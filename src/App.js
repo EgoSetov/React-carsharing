@@ -12,7 +12,8 @@ import UserProfileContaner from './components/UserProifle/UserProfileContaner';
 
 function App() {
 
-	const [modalShow, setModalShow] = React.useState(false);
+	const [modalShow, setModalShow] = useState(false);
+	const [modalSettin, setModalSigin] = useState({ bool: false, title: 'Log in' })
 
 	let showFromLogin = () => {
 		setModalShow(true)
@@ -20,8 +21,6 @@ function App() {
 	let hideFormLogin = () => {
 		setModalShow(false)
 	}
-
-	const [modalSettin, setModalSigin] = useState({ bool: false, title: 'Log in' })
 
 	let showFromSignIn = () => {
 		setModalSigin(() => ({ bool: true, title: 'Registration' }))

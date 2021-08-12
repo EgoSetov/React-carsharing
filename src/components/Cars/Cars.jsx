@@ -1,7 +1,8 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 
-let CarCard = ({ info, setProfile, checkAccount }) => {
+let CarCard = ({ info, setProfile, checkAccount, mas }) => {
 
 	let setProfileFunc = (id) => {
 		setProfile(id)
@@ -21,15 +22,18 @@ let CarCard = ({ info, setProfile, checkAccount }) => {
 			</ul>
 			<div className="card-body">
 				<NavLink onClick={() => { setProfileFunc(info.id) }} to={`/profile/${info.id}`} className="btn btn-info" style={{ margin: '0px 2px' }}>Подробнее</NavLink>
-				<button onClick={() => { checkAccount(info.id) }} className="btn btn-success">Забронировать</button>
+				<button onClick={() => { checkAccount(info.id) }} className="btn btn-success" disabled={info.busy}>Забронировать</button>
 			</div>
 		</div>
 	)
 }
 
-function Cars({ cars, setProfile, checkAccount }) {
+function Cars({ cars, setProfile, checkAccount, profile }) {
 
-	let mapElement = cars.map(el => <CarCard key={el.id} info={el} setProfile={setProfile} checkAccount={checkAccount} />)
+	let mas = [];
+	if (profile.dataUser.id) profile.dataUser.historyBooking.forEach(el => mas.push(el.carModel.id))
+
+	let mapElement = cars.map(el => <CarCard key={el.id} info={el} setProfile={setProfile} checkAccount={checkAccount} mas={mas} />)
 
 	return (
 		<div className="container d-flex justify-content-around flex-wrap">

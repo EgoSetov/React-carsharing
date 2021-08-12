@@ -1,10 +1,11 @@
 const ADD_USER = 'ADD_USER'
+const SET_BOOKING_USER = 'SET_BOOKING_USER'
 
 let initialState = {
 	data: {
 		dataUser: [
-			{ id: 1, login: 'user@mail.ru', password: 'user123', userName: 'user', historyBooking: [{ id: 1, start: '05.08.2021 12:00', end: '05.08.2021 15:00', carModel: 'Mazda' }] },
-			{ id: 2, login: 'user2@mail.ru', password: 'user321', userName: 'user2', historyBooking: [{ id: 1, start: '05.08.2021 08:00', end: '05.08.2021 10:00', carModel: 'Mazda' }] }
+			{ id: 1, login: 'user@mail.ru', password: 'user123', userName: 'user', historyBooking: [] },
+			{ id: 2, login: 'user2@mail.ru', password: 'user321', userName: 'user2', historyBooking: [] }
 		]
 	}
 }
@@ -25,11 +26,24 @@ let UsersDeduser = (state = initialState, action) => {
 				}
 			}
 		}
+		case SET_BOOKING_USER: {
+			// console.log(action.data);
+			let afterDataUser = state.data.dataUser
+			let indexUser = afterDataUser.findIndex(el => el.id === action.id)
+			afterDataUser[indexUser].historyBooking.push(action.data)
+			return {
+				...state,
+				data: {
+					dataUser: afterDataUser
+				}
+			}
+		}
 		default: return state;
 	}
 }
 
 export const addUser = (user) => ({ type: ADD_USER, user })
+export const setBookingUser = (data, id) => ({ type: SET_BOOKING_USER, data, id })
 
 export default UsersDeduser;
 

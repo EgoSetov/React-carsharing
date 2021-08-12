@@ -5,7 +5,7 @@ import ModalFormRegistrationContainer from './Modal-form-registration/ModalFormR
 
 function ModalSign(props) {
 	return (
-		<Modal {...props}>
+		<Modal show={props.show} className={props.className}>
 			<Modal.Header>
 				<Modal.Title id="contained-modal-title-vcenter">
 					{props.title}
@@ -19,7 +19,7 @@ function ModalSign(props) {
 				}
 
 			</Modal.Body>
-		</Modal>
+		</Modal >
 	)
 }
 

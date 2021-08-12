@@ -1,5 +1,5 @@
 .toast{
-	position: absolute !important;
+	position: fixed !important;
 	right: 10px !important;
 	bottom: 10px !important;
 }

@@ -1,11 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Cars from './Cars'
-import { setProfile } from '../../redux/CarsReducer'
+import { setProfile, changeBusy } from '../../redux/CarsReducer'
 import { setMessage } from '../../redux/MessageReducer'
-import { setBooking } from '../../redux/AccountReducer'
+import { setBookingUser } from '../../redux/UsersReducer'
 
 function CarsContainer(props) {
+
+	Date.prototype.format = function (format = 'yyyy-mm-dd') {
+		const replaces = {
+			yyyy: this.getFullYear(),
+			mm: ('0' + (this.getMonth() + 1)).slice(-2),
+			dd: ('0' + this.getDate()).slice(-2),
+			hh: ('0' + this.getHours()).slice(-2),
+			MM: ('0' + this.getMinutes()).slice(-2),
+			ss: ('0' + this.getSeconds()).slice(-2)
+		};
+		let result = format;
+		for (const replace in replaces) {
+			result = result.replace(replace, replaces[replace]);
+		}
+		return result;
+	};
 
 	let checkAccount = (id) => {
 		if (!props.profile.authorized) {
@@ -15,17 +31,21 @@ function CarsContainer(props) {
 				demonstrate: true
 			})
 		} else {
-			props.setBooking({
+			props.changeBusy(id)
+			let date = new Date()
+			let carModel = props.cars.filter(el => el.id === id)[0]
+			props.setBookingUser({
 				id: props.profile.dataUser.historyBooking.length + 1,
-				start: '123123',
-				end: '123123',
-				carModel: '123123123'
-			})
+				start: (date).format('yyyy/mm/dd hh:MM'),
+				end: '',
+				carModel: carModel
+			}, props.profile.dataUser.id)
+
 		}
 	}
 
 	return (
-		<Cars {...props} checkAccount={checkAccount} />
+		<Cars {...props} checkAccount={checkAccount} profile={props.profile} />
 	)
 }
 
@@ -37,5 +57,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
 	setProfile,
 	setMessage,
-	setBooking
+	setBookingUser,
+	changeBusy
 })(CarsContainer)

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom';
 
 function HistoryLi({ info }) {
 	return (
-		<div className="card">
+		<div className="card" style={{ margin: '10px 0px', backgroundColor: '#D1DAFF' }}>
 			<div className="card-body">
 				<div className="infoDrive">
 					<p>Начало езды: {info.start}</p>
@@ -10,7 +11,7 @@ function HistoryLi({ info }) {
 				</div>
 				<div className="infoCar">
 					<h5>Информация про машину</h5>
-					<p>Машина: {info.carModel}</p>
+					<p>Машина: <NavLink to={`/profile/${info.carModel.id}`}>{info.carModel.name}</NavLink></p>
 				</div>
 			</div>
 
