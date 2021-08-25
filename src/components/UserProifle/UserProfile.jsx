@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 
-function HistoryLi({ info }) {
+function HistoryLi(props) {
 	return (
 		<div className="card" style={{ margin: '10px 0px', backgroundColor: '#D1DAFF' }}>
 			<div className="card-body">
 				<div className="infoDrive">
-					<p>Начало езды: {info.start}</p>
-					<p>Конец езды: {info.end}</p>
+					<p>Начало езды: {props.info.start}</p>
+					<p>Конец езды: {props.info.end}</p>
 				</div>
 				<div className="infoCar">
 					<h5>Информация про машину</h5>
-					<p>Машина: <NavLink to={`/profile/${info.carModel.id}`}>{info.carModel.name}</NavLink></p>
+					<p>Машина: <NavLink to={`/profile/${props.info.carModel.id}`}>{props.info.carModel.name}</NavLink></p>
 				</div>
 			</div>
 
@@ -33,7 +33,8 @@ function UserProfile(props) {
 	}
 
 
-	let historyElem = props.profile.historyBooking.map(el => <HistoryLi key={el.id} info={el}></HistoryLi>)
+	let historyElem = props.profile.historyBooking.filter(el => el.end).map(el => <HistoryLi key={el.id} info={el}></HistoryLi>)
+	let unfinishedElem = props.profile.historyBooking.filter(el => el.end === '').map(el => <div key={el.id} className="d-flex justify-content-center flex-column"><HistoryLi info={el}></HistoryLi> <button onClick={() => { props.exitBooking(props.profile.id, el.carModel.id) }} className="btn btn-secondary">Закончить</button></div>)
 
 	return (
 		<div className="container" style={{ marginTop: '30px' }}>
@@ -46,6 +47,8 @@ function UserProfile(props) {
 			</div>
 			<hr></hr>
 			<div style={{ marginTop: '10px' }} className="history">
+				<h2>Незаконченная поездка</h2>
+				{unfinishedElem}
 				<h2>История поездок</h2>
 				{historyElem}
 			</div>

@@ -1,5 +1,8 @@
 const SET_PROFILE = 'SET_PROFILE'
 const CHANGE_BUSY = 'CHANGE_BUSY'
+const CHANGE_SETTING = 'CHANGE_SETTING'
+const DELETE_CAR = 'DELETE_CAR'
+const ADD_CAR = 'ADD_CAR'
 
 const initialState = {
 	data: {
@@ -23,11 +26,58 @@ let CarsReducer = (state = initialState, action) => {
 		}
 		case CHANGE_BUSY: {
 			let cars = [...state.data.cars]
-			cars[action.id - 1].busy = true;
+			let index = cars.findIndex(el => el.id === action.id)
+			cars[index].busy = !cars[index].busy;
 			return {
 				...state,
 				data: {
 					cars,
+					profileNow: state.data.profileNow
+				}
+			}
+		}
+		case CHANGE_SETTING: {
+			let { countFuel, price, description } = action.data
+			let cars = JSON.parse(JSON.stringify(state.data.cars))
+			let index = cars.findIndex(el => el.id === action.id)
+			cars[index].countFuel = countFuel
+			cars[index].price = price
+			cars[index].description = description
+			return {
+				...state,
+				data: {
+					cars
+				},
+				profileNow: state.data.profileNow
+			}
+		}
+		case DELETE_CAR: {
+			let cars = JSON.parse(JSON.stringify(state.data.cars))
+			cars = cars.filter(el => el.id !== action.id)
+			return {
+				...state,
+				data: {
+					cars,
+					profileNow: state.data.profileNow
+				}
+			}
+		}
+		case ADD_CAR: {
+			const { name, price, year, countFuel, info, img } = action.data
+			let newCar = {
+				id: state.data.cars[state.data.cars.length - 1].id + 1,
+				name,
+				age: year,
+				countFuel,
+				price,
+				imageUrl: img ? img : 'https://kolyaska-krovatka.ru/image/cache/catalog/111/no-photo-1200x800.png',
+				description: info ? info : '',
+				busy: false
+			}
+			return {
+				...state,
+				data: {
+					cars: [...state.data.cars, newCar],
 					profileNow: state.data.profileNow
 				}
 			}
@@ -38,5 +88,8 @@ let CarsReducer = (state = initialState, action) => {
 
 export const setProfile = (id) => ({ type: SET_PROFILE, id })
 export const changeBusy = (id) => ({ type: CHANGE_BUSY, id })
+export const changeSetting = (data, id) => ({ type: CHANGE_SETTING, data, id })
+export const deleteCar = (id) => ({ type: DELETE_CAR, id })
+export const addCar = (data) => ({ type: ADD_CAR, data })
 
 export default CarsReducer

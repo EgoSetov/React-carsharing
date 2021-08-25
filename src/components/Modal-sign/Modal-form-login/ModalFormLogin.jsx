@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Field, reduxForm } from 'redux-form';
 import { Button } from 'react-bootstrap'
 import { required } from '../../Validator/Validator';
 
 function ModalForm(props) {
+
+	const [warning, setWarning] = useState(false)
+
 	let handleSub = (values) => {
 		props.setDataForm(values)
 		if (!props.dataUser.id) {
-			console.log(false);
+			if (values.login && values.password) {
+				setWarning((prev) => prev = true)
+			}
 		}
 	};
 
@@ -21,6 +26,10 @@ function ModalForm(props) {
 
 	return (
 		<form onSubmit={props.handleSubmit(handleSub)}>
+			{!warning
+				? ''
+				: <div style={{ color: 'red', fontSize: '18px' }} id="emailHelp" className="form-text">Возможно неправильный логин или пароль</div>}
+
 			<div className="mb-3">
 				<label className="form-label">Адрес электронной почты</label>
 				<Field type="email" className="form-control" validate={[required]} name="login" component="input" />

@@ -25,6 +25,11 @@ let Header = (props) => {
 							<li className="nav-item">
 								<NavLink to="/cars" className="nav-link active">Машины</NavLink>
 							</li>
+							{!props.adminCheck ? '' :
+								<li className="nav-item">
+									<NavLink to="/adminPanel" className="nav-link active">Admin panel</NavLink>
+								</li>
+							}
 						</ul>
 						<div className="d-flex">
 							{!props.authorized

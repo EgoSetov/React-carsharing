@@ -4,26 +4,15 @@ import Cars from './Cars'
 import { setProfile, changeBusy } from '../../redux/CarsReducer'
 import { setMessage } from '../../redux/MessageReducer'
 import { setBookingUser } from '../../redux/UsersReducer'
+import { setCarBooking } from '../../redux/AccountReducer'
+import { exitBooking } from '../../redux/UsersReducer'
+import { format } from '../../formatDate'
 
 function CarsContainer(props) {
 
-	Date.prototype.format = function (format = 'yyyy-mm-dd') {
-		const replaces = {
-			yyyy: this.getFullYear(),
-			mm: ('0' + (this.getMonth() + 1)).slice(-2),
-			dd: ('0' + this.getDate()).slice(-2),
-			hh: ('0' + this.getHours()).slice(-2),
-			MM: ('0' + this.getMinutes()).slice(-2),
-			ss: ('0' + this.getSeconds()).slice(-2)
-		};
-		let result = format;
-		for (const replace in replaces) {
-			result = result.replace(replace, replaces[replace]);
-		}
-		return result;
-	};
 
-	let checkAccount = (id) => {
+
+	let checkAccount = (info) => {
 		if (!props.profile.authorized) {
 			props.setMessage({
 				text: 'Авторизуйтесь, чтобы забронировать автомобиль',
@@ -31,12 +20,12 @@ function CarsContainer(props) {
 				demonstrate: true
 			})
 		} else {
-			props.changeBusy(id)
-			let date = new Date()
-			let carModel = props.cars.filter(el => el.id === id)[0]
+			props.setCarBooking(info)
+			props.changeBusy(info.id)
+			let carModel = props.cars.filter(el => el.id === info.id)[0]
 			props.setBookingUser({
 				id: props.profile.dataUser.historyBooking.length + 1,
-				start: (date).format('yyyy/mm/dd hh:MM'),
+				start: format(),
 				end: '',
 				carModel: carModel
 			}, props.profile.dataUser.id)
@@ -44,8 +33,13 @@ function CarsContainer(props) {
 		}
 	}
 
+	let exitBooking = (idUser, idCar) => {
+		props.exitBooking(idUser, format())
+		props.changeBusy(idCar)
+	}
+
 	return (
-		<Cars {...props} checkAccount={checkAccount} profile={props.profile} />
+		<Cars {...props} checkAccount={checkAccount} profile={props.profile} exitBooking={exitBooking} />
 	)
 }
 
@@ -58,5 +52,7 @@ export default connect(mapStateToProps, {
 	setProfile,
 	setMessage,
 	setBookingUser,
-	changeBusy
+	changeBusy,
+	setCarBooking,
+	exitBooking
 })(CarsContainer)

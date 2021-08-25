@@ -2,11 +2,13 @@ const SET_ACCOUNT = 'SET_ACCOUNT'
 const SET_DATA_FORM = 'SET_DATA_FORM'
 const CLEAR_DATA_USER = 'CLEAR_DATA_USER'
 const SET_BOOKING = 'SET_BOOKING'
+const SET_CAR_BOOKING = 'SET_CAR_BOOKING'
 
 let initialState = {
 	data: {
 		authorized: false,
-		dataUser: {}
+		dataUser: {},
+		carBooking: {}
 	},
 	dataForm: {}
 }
@@ -29,7 +31,6 @@ let AccountReducer = (state = initialState, action) => {
 			return state
 		}
 		case CLEAR_DATA_USER: {
-			console.log('exit');
 			return {
 				...state,
 				data: {
@@ -44,7 +45,16 @@ let AccountReducer = (state = initialState, action) => {
 			return {
 				...state,
 				data: { ...state.data, dataUser: { ...state.data.dataUser, historyBooking: [...state.data.dataUser.historyBooking, { ...action.data }] } },
-				dataForm: {}
+				dataForm: { ...state.dataForm }
+			}
+		}
+		case SET_CAR_BOOKING: {
+			return {
+				...state,
+				data: {
+					...state.data,
+					carBooking: action.data
+				}
 			}
 		}
 		default: return state
@@ -55,5 +65,6 @@ export const setAccount = (data) => ({ type: SET_ACCOUNT, data })
 export const setDataForm = (data) => ({ type: SET_DATA_FORM, data })
 export const clearDataUser = () => ({ type: CLEAR_DATA_USER })
 export const setBooking = (data) => ({ type: SET_BOOKING, data })
+export const setCarBooking = (data) => ({ type: SET_CAR_BOOKING, data })
 
 export default AccountReducer;

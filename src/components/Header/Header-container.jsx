@@ -1,20 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Header from './Header'
 import { setAccount } from '../../redux/AccountReducer'
-import { useEffect } from 'react'
 
 function HeaderContainer(props) {
-	
+
 	useEffect(() => {
 		const dataForm = props.dataForm.login + props.dataForm.password
 		const dataUsers = props.dataUsers
 		const dataUser = dataUsers.filter(el => el.login + el.password === dataForm)
 		if (!(JSON.stringify(dataUser) === '[]')) { props.setAccount(dataUser[0]) }
+
 	})
 
+	let adminCheck = props.dataUser.id ? props.dataUser.login === 'admin@mail.ru' : false
 
-	return <Header {...props} />
+	return <Header {...props} adminCheck={adminCheck} />
 
 }
 

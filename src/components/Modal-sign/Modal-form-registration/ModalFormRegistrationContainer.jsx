@@ -13,6 +13,7 @@ function ModalFormRegistrationContainer(props) {
 		let loginAunt = props.users.some(el => el.login === value.login)
 		let userAunt = props.users.some(el => el.userName === value.nickName)
 		if (!loginAunt && !userAunt) {
+			console.log(value.nickName + ' Ты успешно зарегистрирован!');
 			props.addUser(value)
 			props.setDataForm(value)
 			props.hideSign()
