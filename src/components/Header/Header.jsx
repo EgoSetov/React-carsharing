@@ -13,10 +13,10 @@ let Header = (props) => {
 		<>
 			<nav className={`navbar navbar-expand-lg navbar-light bg-ligth ${s.castomNav}`}>
 				<div className="container-fluid">
-					<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Переключатель навигации">
+					<button onClick={props.showNavBar} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Переключатель навигации">
 						<span className="navbar-toggler-icon"></span>
 					</button>
-					<div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+					<div className={`collapse navbar-collapse ${props.showNav ? 'show' : ''}`} id="navbarTogglerDemo01">
 						<NavLink to="/home" className="navbar-brand">CarSharing</NavLink>
 						<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 							<li className="nav-item">

@@ -17,12 +17,16 @@ function App() {
 
 	const [modalShow, setModalShow] = useState(false);
 	const [modalSettin, setModalSigin] = useState({ bool: false, title: 'Log in' })
+	const [showNav, setShowNav] = useState(false)
 
 	let showFromLogin = () => {
 		setModalShow(true)
 	}
 	let hideFormLogin = () => {
 		setModalShow(false)
+	}
+	let showNavBar = () => {
+		setShowNav((prev) => !prev)
 	}
 
 	let showFromSignIn = () => {
@@ -35,7 +39,7 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>
-				<HeaderContainer show={showFromLogin} />
+				<HeaderContainer showNavBar={showNavBar} showNav={showNav} show={showFromLogin} />
 				<Route path="/home" component={HomeContainer} />
 				<Route path="/cars" component={CarsContainer} />
 				<Route path="/login" component={LoginContainer} />
