@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/react-carsharing/static/css/main.4a95bd37.chunk.css",
+    "main.js": "/react-carsharing/static/js/main.08b0ac87.chunk.js",
+    "main.js.map": "/react-carsharing/static/js/main.08b0ac87.chunk.js.map",
+    "runtime-main.js": "/react-carsharing/static/js/runtime-main.c7a392cb.js",
+    "runtime-main.js.map": "/react-carsharing/static/js/runtime-main.c7a392cb.js.map",
+    "static/css/2.fb17aa6d.chunk.css": "/react-carsharing/static/css/2.fb17aa6d.chunk.css",
+    "static/js/2.78339e43.chunk.js": "/react-carsharing/static/js/2.78339e43.chunk.js",
+    "static/js/2.78339e43.chunk.js.map": "/react-carsharing/static/js/2.78339e43.chunk.js.map",
+    "static/js/3.ae25decb.chunk.js": "/react-carsharing/static/js/3.ae25decb.chunk.js",
+    "static/js/3.ae25decb.chunk.js.map": "/react-carsharing/static/js/3.ae25decb.chunk.js.map",
+    "index.html": "/react-carsharing/index.html",
+    "static/css/2.fb17aa6d.chunk.css.map": "/react-carsharing/static/css/2.fb17aa6d.chunk.css.map",
+    "static/css/main.4a95bd37.chunk.css.map": "/react-carsharing/static/css/main.4a95bd37.chunk.css.map",
+    "static/js/2.78339e43.chunk.js.LICENSE.txt": "/react-carsharing/static/js/2.78339e43.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c7a392cb.js",
+    "static/css/2.fb17aa6d.chunk.css",
+    "static/js/2.78339e43.chunk.js",
+    "static/css/main.4a95bd37.chunk.css",
+    "static/js/main.08b0ac87.chunk.js"
+  ]
+}
